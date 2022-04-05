@@ -30,13 +30,15 @@ class MyHomePage extends StatelessWidget {
         id: 't1', amount: 99.25, date: DateTime.now(), title: 'Groceries'),
     Transaction(id: 't2', amount: 98, date: DateTime.now(), title: 'Books'),
   ];
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Expense App'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -52,6 +54,29 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                        decoration: InputDecoration(labelText: 'Title'),
+                        controller: titleController),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Text('Add Transaction'),
+                      textColor: Colors.amberAccent.shade400,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Column(
                 //Here we are creating a coloumn on main coloumn for transaction
                 children: transaction.map((tx) {
@@ -59,25 +84,25 @@ class MyHomePage extends StatelessWidget {
                   child: Row(
                 children: [
                   Container(
-                    width: 77,
-                    margin: EdgeInsets.only(
-                        left: 15.0, right: 80.0, top: 15, bottom: 15),
-                    child: Text(
-                      tx.amount.toString(),
-                      style: TextStyle(
-                          color: Colors.purple,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.purple,
-                        width: 3,
+                      width: 100,
+                      margin: EdgeInsets.only(
+                          left: 15.0, right: 20.0, top: 15, bottom: 15),
+                      child: Text(
+                        '\$ ${tx.amount}',
+                        style: TextStyle(
+                            color: Colors.purple,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    padding:
-                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-                  ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.purple,
+                          width: 3,
+                        ),
+                      ),
+                      padding:
+                          // EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 5)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
