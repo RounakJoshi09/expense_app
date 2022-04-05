@@ -56,8 +56,17 @@ class MyHomePage extends StatelessWidget {
                 //Here we are creating a coloumn on main coloumn for transaction
                 children: transaction.map((tx) {
               return Card(
-                child: Text(tx.title),
-              );
+                  child: Row(
+                children: [
+                  Text(tx.amount.toString()),
+                  Column(
+                    children: [
+                      Text(tx.title),
+                      Text(tx.date.toString()),
+                    ],
+                  )
+                ],
+              ));
             }).toList())
           ],
         ));
