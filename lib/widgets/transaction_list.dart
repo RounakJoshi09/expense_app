@@ -6,11 +6,10 @@ class TransactionList extends StatelessWidget {
   TransactionList(this.transaction);
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Column(
-            //Here we are creating a coloumn on main coloumn for transaction
-            children: transaction.map((tx) {
+    return Container(
+      height: 450,
+      child: ListView.builder(
+        itemBuilder: ((context, index) {
           return Card(
               child: Row(
             children: [
@@ -19,7 +18,7 @@ class TransactionList extends StatelessWidget {
                   margin: EdgeInsets.only(
                       left: 15.0, right: 20.0, top: 15, bottom: 15),
                   child: Text(
-                    '\$ ${tx.amount}',
+                    '\$ ${transaction[index].amount.toStringAsFixed(2)}',
                     style: TextStyle(
                         color: Colors.purple,
                         fontSize: 20,
@@ -40,7 +39,7 @@ class TransactionList extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      tx.title,
+                      transaction[index].title,
                       style: TextStyle(
                         color: Colors.green,
                         fontSize: 20,
@@ -51,7 +50,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      tx.date.toString().substring(0, 11),
+                      transaction[index].date.toString().substring(0, 11),
                       style: TextStyle(
                           color: Colors.blueGrey[400],
                           fontSize: 14,
@@ -62,7 +61,9 @@ class TransactionList extends StatelessWidget {
               )
             ],
           ));
-        }).toList()),
+        }),
+        //Here we are creating a coloumn on main coloumn for transaction
+        itemCount: transaction.length,
       ),
     );
   }
